@@ -11,7 +11,7 @@ const Home = () => {
         <a className="text-danger">Users</a>
       </Link>
       <div className="mt-6">
-        <Button onClick={() => console.log("hello")}>console says "hello"</Button>
+        <Button color="secondary" onClick={() => console.log("hello")}>console says "hello"</Button>
       </div>
     </div>
   )
