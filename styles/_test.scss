@@ -1,0 +1,55 @@
+@use "sass:string";
+@use "variables" as v;
+
+// 1
+// @each $short-name, $unit-value in v.$fixed-units {
+//   @debug $unit-value;
+  
+//   .m-#{$short-name} {
+//     margin: $unit-value;
+//   }
+// }
+
+// @for $i from 1 through 10 {
+//   .z-#{$i} {
+//     z-index: $i;
+//   }
+// }
+
+// 2
+@mixin create-line($property, $short-name, $value) {
+  @debug $value;
+  $property: $value;
+}
+
+@each $short-name, $unit-value in v.$fixed-units {
+  @debug $unit-value;
+  
+  .m-#{$short-name} {
+    @include create-line("margin", $short-name, $unit-value);
+  }
+}
+
+@for $i from 1 through 10 {
+  .z-#{$i} {
+    @include create-line("z-index", $i, $i);
+  }
+}
+
+
+// 3
+@function set-name($prefix, $short-name) {
+  @debug string.length($prefix);
+
+  @if string.length($prefix) == 1 {
+    @return $prefix + $short-name;
+  } @else {
+    @return $prefix + "-" + $short-name;
+  } 
+}
+
+@for $i from 1 through 10 {
+  .#{set-name("flex", $i)} {
+    @include create-line("flex", $i, $i);
+  }
+}
